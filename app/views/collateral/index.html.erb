@@ -1,0 +1,5 @@
+<ul>
+  <% @collaterals.each do |collateral| %>
+    <li><%= link_to collateral.name, collateral_path(collateral)  %></li>
+  <% end %>
+</ul>
