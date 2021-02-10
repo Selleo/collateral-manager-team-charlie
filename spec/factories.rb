@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :lead do
+    name { "MyString" }
+  end
+
   factory :collaterals_tag do
     collateral_id { nil }
     tag_id { nil }
