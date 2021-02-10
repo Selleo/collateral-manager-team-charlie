@@ -7,3 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'blog')
+
+a = Tag.create(name: 'Ruby')
+b = Tag.create(name: 'Rails')
+c = Tag.create(name: 'USA')
+
+Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'blog', tags: [a,b,c])
+
