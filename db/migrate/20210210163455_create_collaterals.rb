@@ -4,7 +4,6 @@ class CreateCollaterals < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :description
       t.string :url
-      t.string :collateral_type
 
       t.timestamps
     end
