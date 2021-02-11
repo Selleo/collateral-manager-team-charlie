@@ -4,6 +4,10 @@ class TagController < ApplicationController
   end
 
   def new
-    
+    @CollateralsTag = CollateralsTag.new
+  end
+
+  def show
+    @CollateralsTag = CollateralsTag.find(params[:id])
   end
 end
