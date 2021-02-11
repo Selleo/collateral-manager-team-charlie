@@ -1,4 +1,4 @@
-class CollateralController < ApplicationController
+class CollateralsController < ApplicationController
   def index
     @collaterals = Collateral.all
   end
@@ -8,6 +8,7 @@ class CollateralController < ApplicationController
   end
 
   def new
+    @collateral = Collateral.new()
     @tags = Tag.all
   end
 
