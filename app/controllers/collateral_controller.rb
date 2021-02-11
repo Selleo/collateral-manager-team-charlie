@@ -8,11 +8,11 @@ class CollateralController < ApplicationController
   end
 
   def new
-    
+    @tags = Tag.all
   end
 
   def edit
-    
+
   end
 
   def destroy
