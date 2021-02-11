@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :lead
+  resources :tag
+  resources :collateral
 end
