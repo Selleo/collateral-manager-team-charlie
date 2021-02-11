@@ -40,7 +40,7 @@ end
 group :development, :test do
   gem "awesome_print"
   gem 'bullet'
-  gem 'bundler-audit', '>= 0.7.0', require: false
+  # gem 'bundler-audit', '>= 0.7.0', require: false
   gem 'factory_bot_rails'
   gem "pry-byebug"
   gem "pry-rails"
