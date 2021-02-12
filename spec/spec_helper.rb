@@ -8,7 +8,7 @@ if ENV.fetch("COVERAGE", false)
 
   SimpleCov.start "rails"
 
-  if defined?(Spring) && EWNV["DISABLE_SPRING"].to_i == 1
+  if defined?(Spring) && ENV["DISABLE_SPRING"].to_i == 1
     Rails.application.eager_load!
   end
 end
