@@ -1,12 +1,12 @@
 
-<h1>Add new Collateral</h1>
+<h1>New Collateral</h1>
 <div class = 'col-md-8 offset-2'>
   <h1 class = "text-center">New Blog Post</h1>
   <%= simple_form_for @collateral do |f| %>
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :url %>
-    <%= f.input :collateral_type, :collection => @collateral_types.sort.map {|k,v| [v,k]} %>
+    <%= f.input :collateral_type, :collection => Collateral.collateral_types.keys.to_a %>
     <%= f.submit "Add", class: 'btn btn-lg btn-primary float-right' %>
   <% end %>
 </div>

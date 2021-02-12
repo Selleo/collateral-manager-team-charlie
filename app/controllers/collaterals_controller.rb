@@ -8,24 +8,12 @@ class CollateralsController < ApplicationController
   end
 
   def new
-    @collateral_types = {
-      0 => 'Article',
-      1 => 'Video',
-      2 => 'Podcast',
-      3 =>  'Design',
-     }
-
-    @collateral = Collateral.new()
+    @collateral = Collateral.new
     @tags = Tag.all
   end
 
   def create
-    @collateral = Collateral.new()
-    @collateral.name = params[:name]
-    @collateral.description = params[:description]
-    @collateral.url = params[:url]
-    @collateral.url = params[:collateral_type]
-
+    @collateral = Collateral.new(collateral_params)
     if @collateral.save 
       redirect_to "/collaterals/#{@collateral.id}"
     else
@@ -34,10 +22,25 @@ class CollateralsController < ApplicationController
   end
 
   def edit
+    @collateral = Collateral.find(params[:id])
+  end
 
+  def update
+    @collateral = Collateral.find(params[:id])
+  
+    if @collateral.update(collateral_params)
+      redirect_to @collateral
+    else
+      render "new"
+    end
   end
 
   def destroy
     Collateral.destroy(params[:id])
+    redirect_to "/collaterals"
+  end
+
+  def collateral_params
+    params.require(:collateral).permit(:name, :description, :url, :collateral_type)
   end
 end
