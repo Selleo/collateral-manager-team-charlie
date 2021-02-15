@@ -1,11 +1,38 @@
-<h1>Edit Collateral</h1>
-<div class = 'col-md-8 offset-2'>
-  <h1 class = "text-center">New Blog Post</h1>
-  <%= simple_form_for @collateral do |f| %>
+<div class = 'col-md-8 offset-2 new-collateral'>
+  <h1 class = "text-center">Edit Collateral</h1>
+  <%= simple_form_for @collateral, html: { class: "form"} do |f| %>
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :url %>
     <%= f.input :collateral_type, :collection => Collateral.collateral_types.keys.to_a %>
-    <%= f.submit "Add", class: 'btn btn-lg btn-primary float-right' %>
+    <hr/>
+    <h5>Tags</h5>
+    <label><input type="radio" name="add-tag" id="add-tag-radio">Add new tag  </label>
+    <label><input type="radio" name="add-tag" id="select-tag-radio">Select existing tag</label>
+    <div class="tag-input-container">
+      <input type="text" id="add-tag-input" class="form-control">
+      <select class="form-control select-tag">
+       <% @all_tags.each do |tag| %>
+       <option value="<%= tag.id %>" selected="selected"><%= tag.name %></option>
+      <% end %>
+      </select>
+      <div class="tag-weight-container">
+      <label><input type="radio" name="tag-weight" id="tag-weight-1" value="1">1</label>
+      <label><input type="radio" name="tag-weight" value="2">2</label>
+      <label><input type="radio" name="tag-weight" value="3">3</label>
+      <label><input type="radio" name="tag-weight" value="4">4</label>
+      <label><input type="radio" name="tag-weight" value="5">5</label>
+      </div>
+      <span type="button" class="btn btn-sm btn-secondary add-tag-button">Add tag</span>
+    </div>
+    <div class="tag-container">
+      <% @collateral.tags.each do |tag| %>
+        <span id="<%= tag.id %>" class="badge bg-info"><%= tag.name %> <%= fa_icon "times" %></span>
+      <% end %>
+    </div>
+    <%= f.submit "Submit", class: 'btn btn-lg btn-primary' %>
   <% end %>
 </div>
+
+<%= javascript_pack_tag 'add_tag'%>
+
