@@ -13,7 +13,7 @@ RSpec.describe FilterCollateralByTagsQuery do
 
         result = FilterCollateralByTagsQuery.new([tag_ruby]).result
 
-        expect(result).to eq [{ collateral: collateral_matching1, weight: 3.0 }, { collateral: collateral_matching2, weight: 3.0 }]
+        expect(result).to eq [{ collateral: collateral_matching2, weight: 3.0 }, { collateral: collateral_matching1, weight: 3.0 }]
       end
     end
     
