@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <%#
-    Configure default and controller-, and view-specific titles in
-    config/locales/en.yml. For more see:
-    https://github.com/calebthompson/title#usage
-  %>
+
   <title><%= title %></title>
   <%= stylesheet_link_tag :application, media: "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render "flashes" -%>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Collateral Manager</a>
+     <form class="d-flex">
+      <a href="/collaterals/new" class="btn btn-outline-success" type="button">Add new tag</a>
+    </form>
+  </div>
+</nav>
   <%= yield %>
   <%= render "javascript" %>
   <%= render "css_overrides" %>

@@ -31,6 +31,7 @@ gem "bootstrap"
 gem "simple_form"
 gem 'jquery-rails'
 gem "font-awesome-rails"
+gem 'draper'
 
 group :development do
   gem "web-console"
