@@ -27,6 +27,10 @@ gem 'simple_form'
 gem "title"
 gem "tzinfo-data", platforms: [:mingw, :x64_mingw, :mswin, :jruby]
 gem "webpacker"
+gem "bootstrap"
+gem "simple_form"
+gem 'jquery-rails'
+gem "font-awesome-rails"
 
 group :development do
   gem "web-console"

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   resources :lead
   resources :tag
-  resources :collateral
+  resources :collaterals
 end
