@@ -32,13 +32,13 @@ RSpec.describe FilterCollateralByTagsQuery do
     end
     context 'when more than one collateral matches selected tag' do
       it 'return collaterals in right order, basing on their weight' do
-        tag = create(:tag)
-        tag1 = create(:tag)
-        collateral_strong, collateral_midi, collateral_weak, collateral_non_matching = create_list(:collateral, 3)
-        create(:collaterals_tag, tag: tag, collateral: collateral_strong, weight: 5)
-        create(:collaterals_tag, tag: tag, collateral: collateral_midi, weight: 3)
-        create(:collaterals_tag, tag: tag, collateral: collateral_weak, weight: 1)
-        create(:collaterals_tag, tag: tag1, collateral: collateral_non_matching)
+        tag_ruby = create(:tag)
+        tag_js = create(:tag)
+        collateral_strong, collateral_midi, collateral_weak, collateral_non_matching = create_list(:collateral, 4)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_strong, weight: 5)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_midi, weight: 3)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_weak, weight: 1)
+        create(:collaterals_tag, tag: tag_js, collateral: collateral_non_matching, weight: 1)
 
         result = FilterCollateralByTagsQuery.new([tag]).result
 
@@ -76,16 +76,16 @@ RSpec.describe FilterCollateralByTagsQuery do
         tag1 = create(:tag)
         tag2 = create(:tag)
         collateral_matching_strong, collateral_matching_midi, collateral_matching_weak, collateral_non_matching = create_list(:collateral, 4)
-        create(:collaterals_tag, tag: tag, collateral: collateral_matching_strong, weight: 5)
-        create(:collaterals_tag, tag: tag1, collateral: collateral_matching_strong, weight: 5)
-        create(:collaterals_tag, tag: tag, collateral: collateral_matching_midi, weight: 3)
-        create(:collaterals_tag, tag: tag1, collateral: collateral_matching_midi, weight: 3)
-        create(:collaterals_tag, tag: tag, collateral: collateral_matching_weak, weight: 1)
-        create(:collaterals_tag, tag: tag2, collateral: collateral_non_matching)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_matching_strong, weight: 5)
+        create(:collaterals_tag, tag: tag_js, collateral: collateral_matching_strong, weight: 5)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_matching_midi, weight: 3)
+        create(:collaterals_tag, tag: tag_js, collateral: collateral_matching_midi, weight: 3)
+        create(:collaterals_tag, tag: tag_ruby, collateral: collateral_matching_weak, weight: 1)
+        create(:collaterals_tag, tag: tag_python, collateral: collateral_non_matching, weight: 1)
 
-        result = FilterCollateralByTagsQuery.new([tag, tag1]).result
+        result = FilterCollateralByTagsQuery.new([tag_ruby, tag_js]).result
 
-        expect(result).to eq [collateral_matching_strong, collateral_matching_midi, collateral_matching_weak]
+        expect(result).to eq [{ collateral: collateral_matching_strong, weight: 5.0 }, { collateral: collateral_matching_midi, weight: 3.0 }, {collateral: collateral_matching_weak, weight: 0.5 }]
       end
     end
   end
