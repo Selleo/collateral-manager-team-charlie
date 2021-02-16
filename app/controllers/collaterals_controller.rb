@@ -1,8 +1,9 @@
+require 'collateral_decorator'
 require 'json'
 
 class CollateralsController < ApplicationController
   def index
-    @collaterals = Collateral.all
+    @collaterals = CollateralDecorator.decorate_collection(Collateral.all)
   end
 
   def show
