@@ -17,7 +17,7 @@ FactoryBot.define do
     name { "MyString" }
     description { "MyString" }
     url { "MyString" }
-    collateral_type { "MyString" }
+    collateral_type { "article" }
   end
 
   factory :user do
