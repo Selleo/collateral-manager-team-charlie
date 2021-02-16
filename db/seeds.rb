@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-collateral_1 = Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'blog')
-collateral_2 = Collateral.create(name: 'Selleo blog', description: 'Selleo blog description', url: 'https://selleo.com', collateral_type: 'blog')
+collateral_1 = Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'design')
+collateral_2 = Collateral.create(name: 'Selleo blog', description: 'Selleo blog description', url: 'https://selleo.com', collateral_type: 'design')
 
 tag_1 = Tag.create(name: 'Ruby')
 tag_2 = Tag.create(name: 'Rails')
