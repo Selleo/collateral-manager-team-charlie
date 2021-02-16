@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-collateral_1 = Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'blog')
-collateral_2 = Collateral.create(name: 'Selleo blog', description: 'Selleo blog description', url: 'https://selleo.com', collateral_type: 'blog')
-collateral_3 = Collateral.create(name: 'JS IRL', description: 'Javascript in real life', url: 'https://selleo.com', collateral_type: 'blog')
-collateral_4 = Collateral.create(name: 'How to get good', description: 'Tutorial git gud', url: 'https://gitgud.com', collateral_type: 'tutorial')
-collateral_5 = Collateral.create(name: 'Russia times', description: 'News from USSR', url: 'https://russia.ru', collateral_type: 'news')
-collateral_6 = Collateral.create(name: 'USA Journal', description: 'News from USA', url: 'https://nytimes.com', collateral_type: 'news')
+collateral_1 = Collateral.create(name: 'Google blog', description: 'blog description', url: 'https://google.com', collateral_type: 'article')
+collateral_2 = Collateral.create(name: 'Selleo blog', description: 'Selleo blog description', url: 'https://selleo.com', collateral_type: 'article')
+collateral_3 = Collateral.create(name: 'JS IRL', description: 'Javascript in real life', url: 'https://selleo.com', collateral_type: 'video')
+collateral_4 = Collateral.create(name: 'How to get good', description: 'Tutorial git gud', url: 'https://gitgud.com', collateral_type: 'podcast')
+collateral_5 = Collateral.create(name: 'Russia times', description: 'News from USSR', url: 'https://russia.ru', collateral_type: 'podcast')
+collateral_6 = Collateral.create(name: 'USA Journal', description: 'podcast from USA', url: 'https://nytimes.com', collateral_type: 'podcast')
 
 tag_1 = Tag.create(name: 'Ruby')
 tag_2 = Tag.create(name: 'Rails')
