@@ -2,6 +2,8 @@ require 'collateral_decorator'
 require 'json'
 
 class CollateralsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @collaterals = CollateralDecorator.decorate_collection(Collateral.all)
   end
