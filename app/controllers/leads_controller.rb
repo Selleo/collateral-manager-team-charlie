@@ -1,17 +1,54 @@
 class LeadsController < ApplicationController
   def index
+    @leads = Lead.all
+  end
+
+  def add_tags(added_tags)
+    added_tags.each do |tag|
+      begin
+        @existing_tag = Tag.find(tag['id'])
+        LeadsTag.create({ tag_id: @existing_tag['id'],
+                                lead_id: @lead['id'] }).save
+      rescue ActiveRecord::RecordNotFound
+        @new_tag = Tag.create(name: tag['id'])
+        @new_tag.save
+        LeadsTag.create({ tag_id: @new_tag['id'],
+                                lead_id: @lead['id']}).save
+      end
+    end
+  end
+
+  def remove_tags(removed_tags)
+    removed_tags.each do |tag|
+      @lead_tag = LeadsTag.joins(:tag).where('tags.id = ?', tag).first
+      LeadsTag.destroy(@lead_tag['id'])
+    end
   end
 
   def new
+    @lead = Lead.new
+    @all_tags = Tag.all
   end
+
+  def create
+    @lead = Lead.new(leads_params)
+    if @lead.save
+      @added_tags = JSON.parse(params['added_tags'].gsub('\"', '"').gsub('/', ''))
+      add_tags(@added_tags)
+      redirect_to "/leads/#{@lead.id}"
+    else
+      render "new", status: :unprocessable_entity
+    end
+  end
+
 
   #function to show collaterals
   def show
     @lead = Lead.find(params[:id])
-    # @selected_tags_id = [1, 2]
+    @selected_tags_id = [1, 2]
 
-    @collaterals = collateral.all
-    # @collaterals = Collateral.includes(:tags).where(tags: {id: @selected_tags_id})
+    # @collaterals = collateral.all
+    @collaterals = Collateral.includes(:tags).where(tags: {id: @selected_tags_id})
   end
 
   #Function to show collaterals by specific tags, 
@@ -29,6 +66,9 @@ class LeadsController < ApplicationController
 
 end
 
+def leads_params
+  params.require(:lead).permit(:name)
+end
 
 # Collateral.includes(collaterals_tags: :tag).where(collaterals_tags: {tag_id: @specific_tags}).map {|a| 1}
 

@@ -11,7 +11,7 @@
     <label><input type="radio" name="add-tag" id="select-tag-radio">Select existing tag</label>
     <div class="tag-input-container">
       <input type="text" id="add-tag-input" class="form-control">
-      <select class="form-control select-tag">
+      <select id="select-tag" class="form-control select-tag">
        <% @all_tags.each do |tag| %>
        <option value="<%= tag.id %>" selected="selected"><%= tag.name %></option>
       <% end %>

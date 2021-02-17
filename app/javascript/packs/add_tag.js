@@ -2,7 +2,7 @@ const addedTags = [];
 const removedTags = [];
 
 $("#add-tag-radio").prop("checked", true);
-$(".select-tag").hide();
+$("#select-tag").hide();
 $("#tag-weight-1").prop("checked", true);
 
 $("#add-tag-radio").change(function () {
@@ -21,23 +21,27 @@ $("#select-tag-radio").change(function () {
 
 $(".add-tag-button").click(function () {
   const weight = $("input[name=tag-weight]:checked").val();
-  const addTag = $("#add-tag-radio").prop("checked");
+  const addTag = $("#add-tag-radio").prop("checked") || false;
   let value = addTag ? $("#add-tag-input").val() : $(".select-tag").val();
+
   const selectedName = addTag
     ? value
     : $(".select-tag").find("option:selected").text();
 
-  addedTags.push({ weight, id: value });
+  console.log(selectedName);
 
-  $(".tag-container").append(
-    " <span id='" +
-      value +
-      "' class='badge bg-info'>" +
-      selectedName +
-      " - " +
-      weight +
-      "<i class='fa fa-times'/></span>"
-  );
+  if (selectedName) {
+    addedTags.push({ weight, id: value });
+
+    $(".tag-container").append(
+      " <span id='" +
+        value +
+        "' class='badge bg-info'>" +
+        selectedName +
+        (weight ? " - " + weight : "") +
+        "<i class='fa fa-times'/></span>"
+    );
+  }
 });
 
 $(document).on("click", ".fa-times", function () {

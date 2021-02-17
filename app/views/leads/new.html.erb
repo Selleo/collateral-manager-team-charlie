@@ -1,2 +1,20 @@
-<h1>Lead#new</h1>
-<p>Find me in app/views/lead/new.html.erb</p>
+<div class = 'col-md-8 offset-2 new-lead'>
+  <h1 class = "text-center">New Lead</h1>
+  <%= simple_form_for @lead, html: { class: "form lead-form"} do |f| %>
+    <%= f.input :name %>
+    <h6>Tags</h6>
+    <div class="tag-input-container">
+      <select class="form-control select-tag">
+       <% @all_tags.each do |tag| %>
+       <option value="<%= tag.id %>"><%= tag.name %></option>
+      <% end %>
+      </select>
+      <span type="button" class="btn btn-sm btn-secondary add-tag-button">Add tag</span>
+    </div>
+    <div class="tag-container"></div>
+    <%= f.submit "Submit", class: 'btn btn-lg btn-primary' %>
+  <% end %>
+</div>
+
+<%= javascript_pack_tag 'add_tag'%>
+
