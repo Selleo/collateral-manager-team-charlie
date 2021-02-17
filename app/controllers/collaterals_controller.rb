@@ -45,7 +45,7 @@ class CollateralsController < ApplicationController
     @collateral = Collateral.new(collateral_params)
     @collateral_created = @collateral.save
     if @collateral_created
-      @added_tags = JSON.parse(params['added_tags'].gsub('\"', '"').gsub('/', ''))
+      @added_tags = JSON.parse(params['added_tags'].to_s.gsub('\"', '"').gsub('/', ''))
       add_tags(@added_tags)
       redirect_to "/collaterals/#{@collateral.id}"
     else
