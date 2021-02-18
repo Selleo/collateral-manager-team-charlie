@@ -1,8 +1,10 @@
 <h1 class = "text-center">Lead <%= @lead.name %></h1>
 
-<% @lead.tags.each do |tag| %>
+<h5>
+Tags: <% @lead.tags.each do |tag| %>
   <span id="<%= tag.id %>" class="badge bg-info"><%= tag.name %></span>
 <% end %>
+</h5>
 
 <table class="table table-striped table-hover">
   <thead>

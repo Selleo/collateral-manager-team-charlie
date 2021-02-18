@@ -1,6 +1,6 @@
 class LeadsController < ApplicationController
   def index
-    @leads = Lead.all
+    @leads = Lead.paginate(page: params[:page], per_page: 2)
   end
 
   def add_tags(added_tags)
@@ -27,7 +27,7 @@ class LeadsController < ApplicationController
     @lead = Lead.new(leads_params)
     if @lead.save
       @added_tags = JSON.parse(params['added_tags'].gsub('\"', '"').gsub('/', ''))
-      add_tags(@added_tags, @lead)
+      add_tags(@added_tags)
       redirect_to "/leads/#{@lead.id}"
     else
       render "new", status: :unprocessable_entity
@@ -52,6 +52,10 @@ class LeadsController < ApplicationController
     end
   end
 
+  def destroy
+    Lead.destroy(params[:id])
+    redirect_to "/leads"
+  end
 
   #function to show collaterals
   def show
