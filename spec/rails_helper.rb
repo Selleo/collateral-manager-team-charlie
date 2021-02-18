@@ -18,6 +18,7 @@ end
 RSpec.configure do |config|
   config.include SystemTestHelper, type: :system
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = true
