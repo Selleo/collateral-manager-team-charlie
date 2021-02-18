@@ -7,9 +7,13 @@ class LeadController < ApplicationController
         
   end
   def get_collaterals
-    array_of_tags = params["tags"].map(&:to_i)
-    founded_collaterlas = FilterCollateralByTagsQuery.new(array_of_tags).result
-    puts founded_collaterlas
-    render json: founded_collaterlas
+    tags = params["tags"]
+    puts tags.to_a
+    if tags != nil
+      array_of_tags = tags.map(&:to_i)
+      founded_collaterlas = FilterCollateralByTagsQuery.new(array_of_tags).result
+      puts founded_collaterlas
+      render json: founded_collaterlas
+    end
   end
 end
