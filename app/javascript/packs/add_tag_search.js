@@ -65,7 +65,7 @@ $('.submit-button').click(() =>
     
     $.ajax({
       type: 'POST',
-      url: '/lead/get_collaterals',
+      url: '/search/get_collaterals',
       data: {
         tags: addedTags,
         authenticity_token: $('meta[name=csrf-token]').attr('content'),

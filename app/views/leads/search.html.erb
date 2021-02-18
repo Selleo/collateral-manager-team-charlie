@@ -1,0 +1,23 @@
+<div class = 'col-md-8 offset-2 new-collateral'>
+    <form>
+    <h1 class = "text-center">Search by tags</h1>
+    <div class="tag-input-container">
+        <select class="form-control select-tag">
+            <% @all_tags.each do |tag| %>
+                <option value="<%= tag.id %>" selected="selected"><%= tag.name %></option>
+            <% end %>
+        </select>
+        <span type="button" class="btn btn-sm btn-secondary add-tag-button">Add tag</span>
+    </div>
+
+    <div class="tag-container">
+
+    </div>
+    <button class='submit-button' type="button" value="Submit">Search</button>
+    </form>
+    <div id="collaterals"></div>
+
+</div>
+
+<%= javascript_pack_tag 'add_tag_search'%>
+

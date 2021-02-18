@@ -2,6 +2,10 @@ class LeadsController < ApplicationController
   def index
     @all_tags = Tag.all
   end
+  
+  def search
+    @all_tags = Tag.all
+  end
 
   def search_collaterals_by_tags
         
