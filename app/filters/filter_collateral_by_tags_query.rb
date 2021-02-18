@@ -4,11 +4,15 @@ class FilterCollateralByTagsQuery
   end
 
   def result
-    Collateral.includes(collaterals_tags: :tag).where(collaterals_tags: {tag_id: @tags}).map do |collateral|
-      { collateral: collateral, tags: collateral.tags, weight: collateral.collaterals_tags.sum do |collateral_tag| 
-        ((@tags.reverse.index(collateral_tag.tag_id) + 1).to_f / @tags.length.to_f) * collateral_tag.weight
-        end
-      }
-    end.sort_by { |k| - k[:weight] }
+    if @tags.empty?
+      Collateral.all
+    else 
+      Collateral.includes(collaterals_tags: :tag).where(collaterals_tags: {tag_id: @tags}).map do |collateral|
+        { collateral: collateral, weight: collateral.collaterals_tags.sum do |collateral_tag| 
+          ((@tags.reverse.index(collateral_tag.tag_id).to_f + 1).to_f / @tags.length.to_f) * collateral_tag.weight
+          end
+        }
+      end.sort_by { |k| [k[:weight], k[:collateral]] }.reverse
+    end
   end
 end

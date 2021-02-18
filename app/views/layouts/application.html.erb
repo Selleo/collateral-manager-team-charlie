@@ -3,19 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <%#
-    Configure default and controller-, and view-specific titles in
-    config/locales/en.yml. For more see:
-    https://github.com/calebthompson/title#usage
-  %>
+
   <title><%= title %></title>
   <%= stylesheet_link_tag :application, media: "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render "flashes" -%>
-  <%= yield %>
-  <%= render "javascript" %>
-  <%= render "css_overrides" %>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Collateral manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <% if user_signed_in? %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to 'Collaterals', collaterals_path, :class => 'nav-link' %>    
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Add collateral', new_collateral_path, :class => 'nav-link' %>    
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Leads', leads_path, :class => 'nav-link' %>    
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Add lead', new_lead_path, :class => 'nav-link' %>    
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'nav-link' %>    
+          </li>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+          </li>
+        </ul>
+        
+      <% else %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
+          </li>
+        </ul>
+      <% end %>
+
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <%= yield %>
+    <%= render "javascript" %>
+    <%= render "css_overrides" %>
+  </div>
 </body>
 </html>
+

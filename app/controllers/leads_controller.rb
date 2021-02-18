@@ -1,4 +1,4 @@
-class LeadController < ApplicationController
+class LeadsController < ApplicationController
   def index
     @all_tags = Tag.all
   end
