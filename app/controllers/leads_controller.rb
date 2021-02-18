@@ -22,6 +22,10 @@ class LeadsController < ApplicationController
     @lead = Lead.new
     @all_tags = Tag.all
   end
+  
+  def search
+    @all_tags = Tag.all
+  end
 
   def create
     @lead = Lead.new(leads_params)
