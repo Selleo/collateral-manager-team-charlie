@@ -20,7 +20,7 @@
         <%= tag.name %>
        <% end %>
       </td>
-      <td>
+      <td class="text-right">
         <%= link_to 'Remove', collateral, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
         <a class="btn btn-success" href="/collaterals/<%= collateral.id %>/edit">Edit</a>
       </td>
@@ -28,3 +28,4 @@
     <% end %>
   <tbody>
 </table>
+<%= will_paginate @collaterals, renderer: BootstrapPagination::Rails%>

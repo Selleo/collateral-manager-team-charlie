@@ -32,6 +32,8 @@ gem "simple_form"
 gem 'jquery-rails'
 gem "font-awesome-rails"
 gem 'draper'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development do
   gem "web-console"

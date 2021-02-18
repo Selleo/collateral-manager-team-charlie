@@ -11,7 +11,11 @@
       </select>
       <span type="button" class="btn btn-sm btn-secondary add-tag-button">Add tag</span>
     </div>
-    <div class="tag-container"></div>
+    <div class="tag-container">
+      <% @lead.tags.each do |tag| %>
+        <span id="<%= tag.id %>" class="badge bg-info"><%= tag.name %> <%= fa_icon "times" %></span>
+      <% end %>
+    </div>
     <%= f.submit "Submit", class: 'btn btn-lg btn-primary' %>
   <% end %>
 </div>
