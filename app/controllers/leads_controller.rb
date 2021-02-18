@@ -5,16 +5,9 @@ class LeadsController < ApplicationController
 
   def add_tags(added_tags)
     added_tags.each do |tag|
-      begin
-        @existing_tag = Tag.find(tag['id'])
-        LeadsTag.create({ tag_id: @existing_tag['id'],
-                                lead_id: @lead['id'] }).save
-      rescue ActiveRecord::RecordNotFound
-        @new_tag = Tag.create(name: tag['id'])
-        @new_tag.save
-        LeadsTag.create({ tag_id: @new_tag['id'],
-                                lead_id: @lead['id']}).save
-      end
+      @existing_tag = Tag.find(tag['id'])      
+      @created = LeadsTag.create({ tag_id: @existing_tag['id'],
+                              lead_id: @lead['id'] }).save
     end
   end
 
@@ -34,10 +27,28 @@ class LeadsController < ApplicationController
     @lead = Lead.new(leads_params)
     if @lead.save
       @added_tags = JSON.parse(params['added_tags'].gsub('\"', '"').gsub('/', ''))
-      add_tags(@added_tags)
+      add_tags(@added_tags, @lead)
       redirect_to "/leads/#{@lead.id}"
     else
       render "new", status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @lead = Lead.find(params[:id])
+    @all_tags = Tag.all
+  end
+
+  def update
+    @lead = Lead.find(params[:id])
+    if @lead.update(leads_params)  
+      @added_tags = JSON.parse(params['added_tags'].gsub('\"', '"').gsub('/', ''))
+      @removed_tags = JSON.parse(params['removed_tags'].gsub('\"', '"').gsub('/', ''))
+      add_tags(@added_tags)
+      remove_tags(@removed_tags)
+      redirect_to @lead
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -45,7 +56,7 @@ class LeadsController < ApplicationController
   #function to show collaterals
   def show
     @lead = Lead.find(params[:id])
-    @selected_tags_id = [1, 2]
+    @selected_tags_id = @lead.tags.map(&:id)
 
     # @collaterals = collateral.all
     @collaterals = Collateral.includes(:tags).where(tags: {id: @selected_tags_id})

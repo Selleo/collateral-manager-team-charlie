@@ -13,7 +13,7 @@
       <input type="text" id="add-tag-input" class="form-control">
       <select id="select-tag" class="form-control select-tag">
        <% @all_tags.each do |tag| %>
-       <option value="<%= tag.id %>" selected="selected"><%= tag.name %></option>
+       <option value="<%= tag.id %>"><%= tag.name %></option>
       <% end %>
       </select>
       <div class="tag-weight-container">

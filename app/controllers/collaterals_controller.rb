@@ -5,7 +5,7 @@ class CollateralsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @collaterals = CollateralDecorator.decorate_collection(Collateral.all)
+    @collaterals = Collateral.all
   end
 
   def show
@@ -56,7 +56,6 @@ class CollateralsController < ApplicationController
   def edit
     @collateral = Collateral.find(params[:id])
     @all_tags = Tag.all
-    @tags = Tag.joins(:collaterals_tags).where('collaterals_tags.collateral_id = ?', @collateral.id)
   end
 
   def update
