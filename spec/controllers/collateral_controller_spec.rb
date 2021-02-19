@@ -4,34 +4,66 @@ require 'will_paginate/array'
 RSpec.describe CollateralsController, type: :controller do
 
   describe "GET #index" do
-    it "returns http success" do
+    it "redirects to /user/sign_in when not authenticated" do
       get :index
-      expect(response).to have_http_status(302)
-      collaterals = create_list(:collateral, 6).to_a
-      expect(collaterals.paginate(per_page: 2)).to eq([collaterals[0], collaterals[1]])
+      expect(response).to redirect_to('http://test.host/users/sign_in')
+    end
+    
+    it "returns http success" do
+      sign_in(create(:user))
+
+      get :index
+      collaterals = create_list(:collateral, 6)
+
+      expect(response).to have_http_status(:ok)
     end
   end
 
   describe "GET #show" do
-    it "returns http success" do
+    it "redirects to /user/sign_in when not authenticated" do
       collateral = create(:collateral)
       get :show, params: {id: collateral.id}
-      expect(response).to have_http_status(302)
+
+      expect(response).to redirect_to('http://test.host/users/sign_in')
+    end
+
+    it "redirects to /collateral/#id when authenticated" do
+      sign_in(create(:user))
+
+      collateral = create(:collateral)
+      get :show, params: {id: collateral.id }
+
+      expect(response).to have_http_status(:ok)
     end
   end
 
   describe "GET #new" do
-    it "returns http success" do
+    it "redirects to /user/sign_in when not authenticated" do
       get :new
-      expect(response).to have_http_status(302)
+
+      expect(response).to redirect_to('http://test.host/users/sign_in')
+    end
+
+    it "returns http success" do
+      sign_in(create(:user))
+      get :new
+      expect(response).to have_http_status(:ok)
     end
   end
 
   describe "GET #edit" do
-    it "returns http success" do
+    it "redirects to /user/sign_in when not authenticated" do
       collateral = create(:collateral)
       get :edit, params: {id: collateral.id}
-      expect(response).to have_http_status(302)
+      expect(response).to redirect_to('http://test.host/users/sign_in')
+    end
+
+    it "returns http success" do
+      sign_in(create(:user))
+
+      collateral = create(:collateral)
+      get :edit, params: {id: collateral.id}
+      expect(response).to have_http_status(:ok)
     end
   end
 
