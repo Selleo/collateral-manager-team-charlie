@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'will_paginate/array'
 
 RSpec.describe CollateralsController, type: :controller do
 
@@ -6,6 +7,8 @@ RSpec.describe CollateralsController, type: :controller do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(302)
+      collaterals = create_list(:collateral, 6).to_a
+      expect(collaterals.paginate(per_page: 2)).to eq([collaterals[0], collaterals[1]])
     end
   end
 
