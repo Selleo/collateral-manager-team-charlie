@@ -54,7 +54,7 @@ class CollateralsController < ApplicationController
   end
 
   def edit
-    @collateral = Collateral.find(params[:id])
+    @collateral = Collateral.find(params[:id]).decorate
     @all_tags = Tag.all
   end
 

@@ -27,7 +27,7 @@
     </div>
     <div class="tag-container">
       <% @collateral.tags.each do |tag| %>
-        <span id="<%= tag.id %>" class="badge bg-info"><%= tag.name %> <%= fa_icon "times" %></span>
+        <span id="<%= tag.id %>" class="badge bg-info"><%= tag.name %> - <%= tag.weight %> <%= fa_icon "times" %></span>
       <% end %>
     </div>
     <%= f.submit "Submit", class: 'btn btn-lg btn-primary' %>
